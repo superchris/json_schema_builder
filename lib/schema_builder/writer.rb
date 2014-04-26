@@ -52,6 +52,10 @@ module SchemaBuilder
           props["#{name}"] = prop
         end
         obj['properties'] = props
+
+        required = required_fields(model)
+        obj['required'] = required if required.any?
+
         out << obj
         #add links
         if links = links_as_hash[model.name.tableize]
@@ -59,6 +63,11 @@ module SchemaBuilder
         end
       end # models
       out
+    end
+
+    def required_fields(model)
+      required_validators = model.validators.select {|v| v.is_a?(ActiveRecord::Validations::PresenceValidator) }
+      required_validators.map { |v| v.attributes }.flatten.map(&:to_s)
     end
 
     # Collect links from rails routes

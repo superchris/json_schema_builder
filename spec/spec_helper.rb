@@ -2,6 +2,7 @@
 require 'simplecov'
 require 'active_record'
 require 'active_support'
+require 'pry'
 
 SimpleCov.start do
   root File.join(File.dirname(__FILE__), '..')

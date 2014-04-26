@@ -36,6 +36,18 @@ describe SchemaBuilder::Writer do
     end
   end
 
+  describe "required fields" do
+    before :each do
+      @writer = SchemaBuilder::Writer.new
+      @user_hash = @writer.models_as_hash.first
+    end
+
+    it "should mark name as required" do
+      @user_hash["required"].should include("name")
+    end
+  end
+
+
   context 'file writing' do
     before :each do
       @writer = SchemaBuilder::Writer.new

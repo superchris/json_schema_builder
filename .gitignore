@@ -5,3 +5,5 @@ pkg/*
 .rvmrc
 coverage
 json-schema/
+vendor/
+.ruby-version
